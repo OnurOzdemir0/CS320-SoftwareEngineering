@@ -11,6 +11,7 @@ public class chess {
      */
     static void showAFrame(){
         JFrame frame = new JFrame();
+        frame.setTitle("CheT");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         frame.setLayout(new GridBagLayout());
@@ -22,10 +23,11 @@ public class chess {
         frame.pack();
         frame.setVisible(true);
     }
+    
     public static void main(String[] args) {
-        King king = new King(1,5); //mesela yani
+        King king = new King(1,5,true); //mesela yani
         System.out.println(king.getType());
-
+        showAFrame();
 
     }
 }
