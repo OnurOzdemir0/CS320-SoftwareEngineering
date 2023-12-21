@@ -1,4 +1,8 @@
 package Model;
+
+
+import java.awt.Image;
+
 import View.Board;
 
 
@@ -20,6 +24,7 @@ public class Piece {
         this.setColumn(column);
         this.isWhite=isWhite;
     }
+    
 
     public Type getType(){
         return type;
@@ -39,4 +44,5 @@ public class Piece {
 	public void setRow(int row) {
 		this.row = column;
 	}
+	
 }
