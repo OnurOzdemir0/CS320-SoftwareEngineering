@@ -39,6 +39,13 @@ public class Board extends JPanel{ //this is View.Board, so it should be preoccu
 		this.setLayout(new GridBagLayout());
 
 	}
+	
+	
+	 @Override
+	 protected void paintComponent(Graphics g) {
+		 super.paintComponent(g);
+	     paintBoard(g);
+	 }
 
 
 	public void paintBoard(Graphics g2d) {
@@ -57,7 +64,26 @@ public class Board extends JPanel{ //this is View.Board, so it should be preoccu
 
 			}
 		}
+		
+		// Draw letters on the last row- for notation
+	    for (int col = 0; col < 8; col++) {
+	        char letter = (char) ('a' + col);
+	        g.setColor(Color.BLACK);
+	        g.drawString(String.valueOf(letter), col * tileSizeByPixel + tileSizeByPixel / 2 - 5, 8 * tileSizeByPixel - 5);
+	    }
+
+	    // Draw numbers on the last column- for notation
+	    for (int row = 0; row < 8; row++) {
+	        int number = 8 - row;
+	        g.setColor(Color.BLACK);
+	        g.drawString(String.valueOf(number), 8 * tileSizeByPixel - 15, row * tileSizeByPixel + tileSizeByPixel / 2 + 5);
+	    }
+		
+		
 	}
+	
+	
+	
 
 
 
