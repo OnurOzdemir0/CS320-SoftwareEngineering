@@ -12,10 +12,10 @@ enum Type{
 public class Piece {
     private int row;
     private int column;
-    public int xPos;
-    public int yPos;
+    public int order_in_png;
     protected Type type;
     public boolean isWhite;
+    private Image pieceImage;
     
     Board board;
 
@@ -23,6 +23,14 @@ public class Piece {
         this.row = row;
         this.setColumn(column);
         this.isWhite=isWhite;
+    }
+    
+    public Image getPieceImage() {
+        return pieceImage;
+    }
+
+    public void setPieceImage(Image pieceImage) {
+        this.pieceImage = pieceImage;
     }
     
 
