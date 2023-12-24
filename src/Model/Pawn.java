@@ -8,4 +8,5 @@ public class Pawn extends Piece{
         this.isWhite=isWhite;
         this.order_in_png=5;
     }
+    
 }

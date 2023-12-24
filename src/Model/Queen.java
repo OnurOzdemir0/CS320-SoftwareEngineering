@@ -8,4 +8,9 @@ public class Queen extends Piece{
         this.isWhite=isWhite;
         this.order_in_png=1;
     }
+    
+    @Override
+    public boolean isMoveValid(Move move){// Valid moves for queen is combination of bishop and rook.
+    	return Rook.isRookMoveValid(move) || Bishop.isBishopMoveValid(move);
+	}
 }

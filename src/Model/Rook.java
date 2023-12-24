@@ -8,4 +8,13 @@ public class Rook extends Piece{
         this.isWhite=isWhite;
         this.order_in_png=4;
     }
+    
+    @Override
+    public boolean isMoveValid(Move move) {
+    	return isRookMoveValid(move);
+	}
+    
+    public static boolean isRookMoveValid(Move move){ //Created to be able to use in queen
+    	return move.newRow == move.oldRow || move.oldColumn == move.newColumn;
+	}
 }

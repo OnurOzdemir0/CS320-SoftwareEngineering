@@ -53,4 +53,8 @@ public class Piece {
 		this.row = column;
 	}
 	
+	public boolean isMoveValid(Move move) {
+		return true; 
+	}
+	
 }
