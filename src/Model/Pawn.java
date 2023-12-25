@@ -16,7 +16,7 @@ public class Pawn extends Piece{
 
         boolean firstMove;
         if(isWhite){
-            firstMove= move.oldRow == 2;
+            firstMove= move.oldRow == 1;
         }
         else{
             firstMove = move.oldRow == 7;

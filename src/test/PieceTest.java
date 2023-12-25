@@ -48,13 +48,13 @@ public class PieceTest {
 
     @Test
     public void testPawn(){ //this is a hideous way of testing this.
-        Pawn kingPawn1 = new Pawn(2,5,true); //beyaz şah piyonu
-        Pawn kingPawn2 = new Pawn(3,5,true); //beyaz şah piyonu ama bir oynamış
+        Pawn kingPawn1 = new Pawn(1,5,true); //beyaz şah piyonu
+        Pawn kingPawn2 = new Pawn(2,5,true); //beyaz şah piyonu ama bir oynamış
 
-        Move move11 = new Move(board, kingPawn1, 3, 5);
-        Move move12 = new Move(board, kingPawn1, 4, 5);
-        Move move21 = new Move(board, kingPawn2, 4, 5);
-        Move move22 = new Move(board, kingPawn2, 5, 5);
+        Move move11 = new Move(board, kingPawn1, 2, 5);
+        Move move12 = new Move(board, kingPawn1, 3, 5);
+        Move move21 = new Move(board, kingPawn2, 3, 5);
+        Move move22 = new Move(board, kingPawn2, 4, 5);
 
         assertTrue(kingPawn1.isMoveValid(move11));
         assertTrue(kingPawn1.isMoveValid(move12));
