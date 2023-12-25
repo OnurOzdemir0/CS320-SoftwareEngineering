@@ -12,13 +12,20 @@ public class MoveTest {
     public void testMoveCollidesQueen(){
         Queen queen = new Queen(5,5,true);
         Move move = new Move(board, queen, 6,6);
-        System.out.println(queen.isMoveValid(move));
-        System.out.println(move.moveCollides());
+        Assert.assertTrue(queen.isMoveValid(move));
+        Assert.assertTrue(move.moveCollides());
 
     }
     @Test
     public void testMoveCollidesPawn(){
-       //work in progress.
+        Pawn pawn = (Pawn)board.getPiece(4,1); //şah piyonu, beyaz
+        System.out.println("row: "+pawn.getRow());
+        System.out.println("column: "+pawn.getColumn());
+        System.out.println(pawn.getType());
+
+        Move move = new Move(board, pawn, 2,4);
+        Assert.assertFalse(move.moveCollides());
+        //System.out.println(move.moveCollides());
 
     }
 }

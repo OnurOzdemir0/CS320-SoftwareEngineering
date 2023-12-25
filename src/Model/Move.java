@@ -34,24 +34,24 @@ public class Move {
 
         if(smallRow == bigRow){ //yatay harekette
             while(smallColumn != bigColumn){
+                smallColumn++;
                 if(board.getPiece(smallColumn, smallRow) != null)
                     return true;
-                smallColumn++;
             }
         }
         else if(smallColumn == bigColumn) { //dikey hareket
             while(smallRow != bigRow){
+                smallRow++;
                 if(board.getPiece(smallColumn, smallRow) != null)
                     return true;
-                smallRow++;
             }
         }
         else{ //çapraz hareket
             while(smallColumn != bigColumn && smallRow != bigRow) {//the second part should be unnecessary
-                if(board.getPiece(smallColumn, smallRow) != null)
-                    return true;
                 smallRow++;
                 smallColumn++;
+                if(board.getPiece(smallColumn, smallRow) != null)
+                    return true;
             }
         }
             return false;
