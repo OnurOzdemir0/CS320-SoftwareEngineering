@@ -3,18 +3,14 @@ package View;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import Model.Bishop;
-import Model.King;
-import Model.Knight;
-import Model.Pawn;
-import Model.Piece;
-import Model.Queen;
-import Model.Rook;
-
+import Model.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
+
+import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Board extends JPanel{ //this is View.Board, so it should be preoccupied with just showing the board.
 
@@ -90,8 +86,8 @@ public class Board extends JPanel{ //this is View.Board, so it should be preoccu
 
 
 		try {
-			BufferedImage allPiecesImage = ImageIO.read(ClassLoader.getSystemResourceAsStream("pieces.png"));
-			int pieceWidth = allPiecesImage.getWidth() / 6; // There are 6 pieces in a row 
+			BufferedImage allPiecesImage = ImageIO.read(getSystemResourceAsStream("pieces.png"));
+			int pieceWidth = allPiecesImage.getWidth() / 6; // There are 6 pieces in a row
 			int pieceHeight = allPiecesImage.getHeight() / 2; // There are 2 rows for each color
 
 			//assign each image to the corresponding Piece objects

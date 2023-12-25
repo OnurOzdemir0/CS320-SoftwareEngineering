@@ -11,7 +11,7 @@ public class chess {
     /**
      * denemek için yazdım. Ekrana bir frame ve panel göstermekten başka bir şey yapmıyor
      */
-    static void showAFrame(){
+    public static void showAFrame(){
         JFrame frame = new JFrame();
         frame.setTitle("CheT");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -25,11 +25,5 @@ public class chess {
         frame.pack();
         frame.setVisible(true);
     }
-    
-    public static void main(String[] args) {
-        King king = new King(1,5,true); //mesela yani
-        System.out.println(king.getType());
-        showAFrame();
 
-    }
 }
