@@ -11,12 +11,12 @@ public class Move {
     Piece playing_piece;
 	Piece captured_piece;
 
-    Move(Board board,Piece piece,int newRow, int newColumn){
+    public Move(Board board, Piece piece, int newRow, int newColumn){
+        this.playing_piece=piece;
     	this.oldColumn=playing_piece.getColumn();
     	this.oldRow=playing_piece.getRow();
         this.newRow = newRow;
         this.newColumn = newColumn;
-        this.playing_piece=piece;
         this.captured_piece=board.getPiece(newColumn, newRow);
     }
 
