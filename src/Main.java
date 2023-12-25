@@ -1,11 +1,12 @@
+package src;
 //import all
-import Controller.*;
-import Model.*;
-import View.*;
+import src.Controller.*;
+import src.Model.*;
+import src.View.*;
 
 public class Main {
     public static void main(String[] args) {
-        View.chess.showAFrame();
+        src.View.chess.showAFrame();
     }
 
 

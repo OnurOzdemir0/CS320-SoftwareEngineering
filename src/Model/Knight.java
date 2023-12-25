@@ -1,5 +1,4 @@
-package Model;
-
+package src.Model;
 
 public class Knight extends Piece{
     public Knight(int row, int column, boolean isWhite){

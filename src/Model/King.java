@@ -1,4 +1,4 @@
-package Model;
+package src.Model;
 
 public class King extends Piece{
     public King(int row, int column, boolean isWhite){

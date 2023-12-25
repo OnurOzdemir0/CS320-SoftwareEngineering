@@ -1,11 +1,11 @@
-package View;
+package src.View;
 
 import javax.swing.*;
 import java.awt.*;
 
-import View.*;
-import Model.*;
-import Controller.*;
+import src.View.*;
+import src.Model.*;
+import src.Controller.*;
 public class chess {
 
     /**

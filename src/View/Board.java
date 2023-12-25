@@ -1,9 +1,9 @@
-package View;
+package src.View;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import Model.*;
+import src.Model.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -86,7 +86,7 @@ public class Board extends JPanel{ //this is View.Board, so it should be preoccu
 
 
 		try {
-			BufferedImage allPiecesImage = ImageIO.read(getSystemResourceAsStream("pieces.png"));
+			BufferedImage allPiecesImage = ImageIO.read(getSystemResourceAsStream("src/View/pieces.png"));
 			int pieceWidth = allPiecesImage.getWidth() / 6; // There are 6 pieces in a row
 			int pieceHeight = allPiecesImage.getHeight() / 2; // There are 2 rows for each color
 

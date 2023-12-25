@@ -1,6 +1,6 @@
-package Model;
+package src.Model;
 
-import View.Board;
+import src.View.Board;
 
 public class Move {
     int oldRow; //Move objects can include these, but this might be unnecessary...

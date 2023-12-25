@@ -1,9 +1,9 @@
-package Model;
+package src.Model;
 
 
 import java.awt.Image;
 
-import View.Board;
+import src.View.Board;
 
 
 enum Type{
@@ -19,7 +19,7 @@ public class Piece {
     
     Board board;
 
-    Piece(int row, int column, boolean isWhite){
+    public Piece(int row, int column, boolean isWhite){
         this.row = row;
         this.setColumn(column);
         this.isWhite=isWhite;
