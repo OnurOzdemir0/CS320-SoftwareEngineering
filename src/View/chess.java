@@ -45,6 +45,10 @@ public class chess {
         frame.setLocationRelativeTo(null);
 
         frame.setVisible(true);
+
+        Input input= new Input(board);
+        board.addMouseListener(input);
+        board.addMouseMotionListener(input);
     }
 
 }
