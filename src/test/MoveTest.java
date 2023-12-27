@@ -7,7 +7,7 @@ import src.View.Board;
 import src.Model.*;
 
 public class MoveTest {
-    static Board board = new Board();
+    static Board board = new Board(null);
     @Test
     public void testMoveCollidesQueen(){
         Queen queen = new Queen(5,5,true);

@@ -14,9 +14,11 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Board extends JPanel{ //this is View.Board, so it should be preoccupied with just showing the board.
 
-	private final static int tileSizeByPixel = 85;
+	private final static int tileSizeByPixel = 83;
 	final static int columnNumber = 8;
 	final static int rowNumber = 8;
+	
+	private notationPanel notationPanel;
 
 	public ArrayList<Piece> pieceList= new ArrayList<>();
 
@@ -29,6 +31,68 @@ public class Board extends JPanel{ //this is View.Board, so it should be preoccu
 		}		
 		return null;
 	}
+	
+	/*public void makeMove(Move move){ // bu ve burdan sonraki kısımlar daha daha implemente edilmedi notasyonun nasıl kullanılacağını göstermek için ekledim
+		move.piece.col=move.newCol;
+		move.piece.row=move.newRow;
+		move.piece.xPos=move.newCol*squaresize;
+		move.piece.yPos=move.newRow*squaresize;
+		
+		notationPanel.addMoveNotation(getMoveNotation(move));
+		
+		capture(move);
+		
+	}
+	
+	private String getMoveNotation(Move move) {
+		
+		final String[] row_to_letter = {"a", "b", "c", "d", "e", "f", "g", "h"};
+		String newCol = row_to_letter[move.newCol];
+		if( move.piece.name.equals("Knight")) {
+			if(move.capture==null) {
+				return "N" + newCol + move.newRow;
+			}
+			else {
+				return "N" + "x" + newCol + move.newRow;
+			}
+		}
+		
+		else{
+			if(move.capture==null) {
+				return move.piece.name.charAt(0) + newCol + move.newRow;
+			}
+			else {
+				return move.piece.name.charAt(0) + "x" + newCol + move.newRow;
+			}
+		}
+	}
+	
+	
+	public void capture(Move move) {
+		pieceList.remove(move.capture);
+	}
+	
+	public boolean isValidMove(Move move) {
+		if(sameTeam(move.piece,move.capture)) {
+			return false;
+		}
+		if(!move.piece.isValidMovement(move.newCol, move.newRow)) {
+			return false;
+		}
+		if (move.piece.moveCollidesWithPiece(move.newCol, move.newRow)){
+			return false;
+		}
+		
+		return true;
+	}
+	
+	
+	public boolean sameTeam(Piece p1, Piece p2){
+		if(p1==null || p2==null) {
+			return false;
+		}
+		return p1.isWhite==p2.isWhite;
+	}*/
 
 
 	public static int getTilesizebypixel() {
@@ -39,11 +103,12 @@ public class Board extends JPanel{ //this is View.Board, so it should be preoccu
 	/**
 	 * This is a JPanel.
 	 */
-	public Board(){
+	public Board(notationPanel notationPanel){
 		this.setPreferredSize(new Dimension(columnNumber*getTilesizebypixel(), rowNumber*getTilesizebypixel()));
 		this.setBackground(Color.gray);
 		this.setLayout(new GridBagLayout());
 		initializePieces();
+		this.notationPanel = notationPanel;
 
 	}
 
