@@ -47,7 +47,9 @@ public class LoginView extends JFrame {
                 cardLayout.show(cardPanel, String.valueOf(panel))
             }
         });
-
+        
+        JButton rules = new JButton("RULES");
+        rules.setBounds(250,500,300,100);
     }
 
 
@@ -60,3 +62,4 @@ public class LoginView extends JFrame {
         CheT.add(panel);
         CheT.setVisible(true);
 }
+
