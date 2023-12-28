@@ -1,3 +1,5 @@
+package src.View;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -60,7 +62,7 @@ public class LoginView extends JFrame {
         rules.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Rules();
+                //new Rules();
             }
         });
 
