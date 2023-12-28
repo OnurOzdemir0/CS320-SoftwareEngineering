@@ -77,22 +77,47 @@ public class Input implements MouseListener, MouseMotionListener {
         }
     }
 
+   // public void paint(Graphics g) {
+     //   if (selectedPiece != null) {
+
+      //  }
+    //}
+
     public void paint(Graphics g) {
         if (selectedPiece != null) {
-
+            if (draggingPoint != null) {
+                g.drawImage(selectedPiece.getPieceImage(), draggingPoint.x, draggingPoint.y, null);
+            } else {
+                g.drawImage(selectedPiece.getPieceImage(),
+                        originalPoint.x * Board.getTilesizebypixel(),
+                        originalPoint.y * Board.getTilesizebypixel(), null);
+            }
         }
     }
 
+        @Override
+        public void mouseClicked (MouseEvent e){
+        }
 
-    @Override
-    public void mouseClicked(MouseEvent e) { }
+        @Override
+        public void mouseEntered (MouseEvent e){
+        }
 
-    @Override
-    public void mouseEntered(MouseEvent e) { }
+        @Override
+        public void mouseExited (MouseEvent e){
+        }
 
-    @Override
-    public void mouseExited(MouseEvent e) { }
+        //@Override
+        // public void mouseMoved(MouseEvent e) { }
 
-    @Override
-    public void mouseMoved(MouseEvent e) { }
+
+        public void mouseMoved(MouseEvent e){
+
+            int col = e.getX() / Board.getTilesizebypixel();
+            int row = e.getY() / Board.getTilesizebypixel();
+
+
+            System.out.println("Mouse moved to position - Col: " + col + ", Row: " + row);
+        }
+
 }
