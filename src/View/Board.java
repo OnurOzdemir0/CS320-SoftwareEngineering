@@ -15,13 +15,12 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 public class Board extends JPanel{ //this is View.Board, so it should be preoccupied with just showing the board.
 
 	private final static int tileSizeByPixel = 83;
-	final static int columnNumber = 8;
-	final static int rowNumber = 8;
+	public final static int columnNumber = 8;
+	public final static int rowNumber = 8;
 	
 	private notationPanel notationPanel;
 
 	public ArrayList<Piece> pieceList= new ArrayList<>();
-
 
 	public Piece getPiece(int col, int row) {
 		for(Piece piece:pieceList) {

@@ -23,37 +23,54 @@ public class Input implements MouseListener, MouseMotionListener {
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
+    public void mousePressed(MouseEvent e) { //bu tıklandığı zaman "selectedPiece" doğru tanımlanmış oluyor
         int col = e.getX() / Board.getTilesizebypixel();
         int row = e.getY() / Board.getTilesizebypixel();
 
         selectedPiece = board.getPiece(col, row);
         if (selectedPiece != null && (turnWhite == selectedPiece.isWhite)) {
-            originalPoint = new Point(col,row);
+            originalPoint = new Point(col,row); //ne yapıyor ki burası?
         } else if (selectedPiece == null) {
             System.out.println("blank space");
         }
+        board.repaint();
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+
+        int col = e.getX() / Board.getTilesizebypixel();
+        int row = e.getY() / Board.getTilesizebypixel();
+
+        if (col < 0) col = 0;
+        if (col >= board.columnNumber) col = board.columnNumber - 1;
+        if (row < 0) row = 0;
+        if (row >= board.rowNumber) row = board.rowNumber - 1;
+
+        System.out.println("okuduğum satır: "+row+ " sütun: "+col);
+
         if (selectedPiece != null ) {
 
-            System.out.println(selectedPiece.getType());
+            Move move = new Move(board, selectedPiece, row, col);
 
-            int col = e.getX() / Board.getTilesizebypixel();
-            int row = e.getY() / Board.getTilesizebypixel();
-
-            if(selectedPiece.isMoveValid(new Move(board, selectedPiece,row,col))) {
-                Move move = new Move(board, selectedPiece, row, col);
+            //if(selectedPiece.isMoveValid(move)) {
+            if(true) {
+                //Move move = new Move(board, selectedPiece, row, col);
+                move.makeMove(move);
             }
+            //System.out.println(selectedPiece.getType());
 
             selectedPiece = null;
+            board.repaint();
         }
+
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+
         if (selectedPiece != null) {
             draggingPoint = e.getPoint();
             board.repaint();

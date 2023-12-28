@@ -28,4 +28,7 @@ public class MoveTest {
         //System.out.println(move.moveCollides());
 
     }
+    @Test
+    public void testCapture(){
+    }
 }

@@ -33,21 +33,21 @@ public class Move {
         int bigColumn = Math.max(oldColumn, newColumn);
 
         if(smallRow == bigRow){ //yatay harekette
-            while(smallColumn != bigColumn){
+            while(smallColumn != bigColumn-1){
                 smallColumn++;
                 if(board.getPiece(smallColumn, smallRow) != null)
                     return true;
             }
         }
         else if(smallColumn == bigColumn) { //dikey hareket
-            while(smallRow != bigRow){
+            while(smallRow != bigRow-1){
                 smallRow++;
                 if(board.getPiece(smallColumn, smallRow) != null)
                     return true;
             }
         }
         else{ //çapraz hareket
-            while(smallColumn != bigColumn && smallRow != bigRow) {//the second part should be unnecessary
+            while(smallColumn != bigColumn-1 && smallRow != bigRow-1) {//the second part should be unnecessary
                 smallRow++;
                 smallColumn++;
                 if(board.getPiece(smallColumn, smallRow) != null)
@@ -55,8 +55,42 @@ public class Move {
             }
         }
             return false;
+    }
 
+    public void makeMove(Move move){ //perhaps this isn't the perfect class for this method but meh
+        if(move.playing_piece.isMoveValid(move)){ //jesus, this is not optimal
+            if(moveCollides() && move.captured_piece == null){
+                System.out.println("move collides but no capture");
+            }
+            else if(capturePiece(move)){
+                move.playing_piece.setColumn(move.newColumn);
+                move.playing_piece.setRow(move.newRow);}
+            System.out.println(playing_piece.getType()+" ile "+move.newColumn + " sütununa ve "+move.newRow+" satırına gitmeye çalışıyorsun");
+            move.board.repaint();
+        }
+        else
+            System.out.println("move not valid for: "+move.playing_piece.getType());
+    }
 
+    /**
+     *
+     * @param move aldığı hamle
+     * @return if the move can be executed.
+     */
+    public boolean capturePiece(Move move){
+        if(captured_piece != null){
+                if(captured_piece.isWhite ^ move.playing_piece.isWhite){ //so if their colours are not the same, meaning the one can actually capture the other
+                    this.board.pieceList.remove(captured_piece);
+                    return true;
+                }
+                else //eğer renkleri aynıysa kıramaz.
+                    return false;
+
+        }
+        return true;
+    }
+    public void capturePiece1(Move move){
+        board.pieceList.remove(captured_piece);
     }
 
 }

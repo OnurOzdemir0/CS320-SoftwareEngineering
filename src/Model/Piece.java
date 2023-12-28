@@ -50,7 +50,7 @@ public class Piece {
 	}
 
 	public void setRow(int row) {
-		this.row = column;
+		this.row = row;
 	}
 	
 	public boolean isMoveValid(Move move) {
