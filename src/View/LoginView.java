@@ -62,7 +62,7 @@ public class LoginView extends JFrame {
         rules.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //new Rules();
+                new Rules();
             }
         });
 
