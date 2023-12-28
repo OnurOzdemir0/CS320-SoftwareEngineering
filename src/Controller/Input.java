@@ -76,6 +76,17 @@ public class Input implements MouseListener, MouseMotionListener {
     @Override
     public void mouseExited(MouseEvent e) { }
 
+    //@Override
+   // public void mouseMoved(MouseEvent e) { }
+
     @Override
-    public void mouseMoved(MouseEvent e) { }
+    public void mouseMoved(MouseEvent e) {
+
+        int col = e.getX() / Board.getTilesizebypixel();
+        int row = e.getY() / Board.getTilesizebypixel();
+
+
+        System.out.println("Mouse moved to position - Col: " + col + ", Row: " + row);
+    }
+
 }
