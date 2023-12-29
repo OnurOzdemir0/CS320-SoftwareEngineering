@@ -52,8 +52,10 @@ public class Input implements MouseListener, MouseMotionListener {
             Move move = new Move(board, board.selectedPiece, row, col);
             if(move.playing_piece.isMoveValid(move)){
 
-                if(move.makeMove()) //if can make move then turn changes. some validations are made in makeMove() some in isMoveValid()
+                if(move.canMove()){ //if can make move then turn changes. some validations are made in makeMove() some in isMoveValid()
+                    move.makeMove();
                     turnWhite = !turnWhite;
+                }
             }
             board.selectedPiece = null;
             board.repaint();

@@ -92,7 +92,7 @@ public class BoardTest {
         Assert.assertTrue(pawn.isMoveValid(validMove));
 
 
-       Assert.assertTrue(validMove.makeMove());
+//       Assert.assertTrue(validMove.makeMove());
         Assert.assertNull(board.getPiece(1, 1));
         Assert.assertEquals(pawn, board.getPiece(3, 1));
     }

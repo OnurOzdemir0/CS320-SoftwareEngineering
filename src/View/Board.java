@@ -189,7 +189,9 @@ public void highlight_valid_positions(Graphics g){
 		if(selectedPiece!=null) {
 			for (int r = 0; r < rowNumber; r++){
 				for (int c = 0; c < columnNumber; c++){
-					if(selectedPiece.isMoveValid(new Move(this,selectedPiece,r,c))) {
+					Move move = new Move(this,selectedPiece,r,c);
+
+					if(move.canMove()){
 						g2d.setColor(new Color(82, 252, 3, 80));
 						g2d.fillRect(c*tileSizeByPixel, r*tileSizeByPixel, tileSizeByPixel, tileSizeByPixel);
 					}
