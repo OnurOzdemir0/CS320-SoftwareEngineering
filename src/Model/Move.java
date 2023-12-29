@@ -27,6 +27,10 @@ public class Move {
         if(this.playing_piece.getType() == Type.Knight) {
             return (board.getPiece(newColumn, newRow) != null); //at yalnızca varağında bir taş varsa "collide" ediyor.
         }
+
+        if(captured_piece != null && captured_piece.type == Type.King)
+            return true;
+
         int smallRow = Math.min(oldRow, newRow);
         int bigRow = Math.max(oldRow, newRow);
         int smallColumn = Math.min(oldColumn, newColumn);
@@ -47,11 +51,17 @@ public class Move {
             }
         }
         else{ //çapraz hareket
-            while(smallColumn != bigColumn-1 && smallRow != bigRow-1) {//the second part should be unnecessary
-                smallRow++;
-                smallColumn++;
-                if(board.getPiece(smallColumn, smallRow) != null)
+            int rowStep = (newRow > oldRow) ? 1 : -1;
+            int columnStep = (newColumn > oldColumn) ? 1 : -1;
+            int currentRow = oldRow;
+            int currentColumn = oldColumn;
+
+            while ((currentRow != newRow - rowStep) && (currentColumn != newColumn - columnStep)) {
+                currentRow += rowStep;
+                currentColumn += columnStep;
+                if (board.getPiece(currentColumn, currentRow) != null) {
                     return true;
+                }
             }
         }
             return false;
@@ -65,7 +75,7 @@ public class Move {
             else if(capturePiece(this)){
                 playing_piece.setColumn(this.newColumn);
                 playing_piece.setRow(this.newRow);}
-            System.out.println(playing_piece.getType()+" ile "+this.newColumn + " sütununa ve "+this.newRow+" satırına gitmeye çalışıyorsun");
+//            System.out.println(playing_piece.getType()+" ile "+this.newColumn + " sütununa ve "+this.newRow+" satırına gitmeye çalışıyorsun");
             this.board.repaint();
             return true;
         }

@@ -66,7 +66,7 @@ public class Pawn extends Piece{
                         move.newColumn == move.oldColumn &&         //make sure same column
                         move.captured_piece == null;
             else
-                return Math.abs(move.newRow-move.oldRow) ==2 || Math.abs(move.newRow-move.oldRow) ==1 && (move.captured_piece == null && move.newColumn == move.oldColumn);
+                return (Math.abs(move.newRow-move.oldRow) ==2 || Math.abs(move.newRow-move.oldRow) ==1) && (move.captured_piece == null && move.newColumn == move.oldColumn);
         }
 
     }
