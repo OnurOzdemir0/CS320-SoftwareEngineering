@@ -12,6 +12,30 @@ public class Move {
 	Piece captured_piece;
 
     Board board; //lazım oluyor.
+    
+	private String getMoveNotation(Move move) {
+		
+		final String[] column_to_letter = {"a", "b", "c", "d", "e", "f", "g", "h"};
+		String newCol = column_to_letter[move.newColumn];
+		int newRow= 8-move.newRow;
+		if( move.playing_piece.type.name().equals("Knight")) {
+			if(move.captured_piece==null) {
+				return "N" + newCol + move.newRow;
+			}
+			else {
+				return "N" + "x" + newCol + newRow;
+			}
+		}
+		
+		else{
+			if(move.captured_piece==null) {
+				return move.playing_piece.type.name().charAt(0) + newCol +newRow;
+			}
+			else {
+				return move.playing_piece.type.name().charAt(0) + "x" + newCol + newRow;
+			}
+		}
+	}
 
     public Move(Board board, Piece piece, int newRow, int newColumn){
         this.playing_piece=piece;
@@ -66,6 +90,7 @@ public class Move {
 
     public boolean makeMove(){  //called from move object: move.MakeMove()
         if(playing_piece.isMoveValid(this)){
+        	board.notationPanel.addMoveNotation(getMoveNotation(this));
             if(moveCollides() && this.captured_piece == null){
                 System.out.println("move collides but no capture");
             }

@@ -21,7 +21,8 @@ public class chess {
         notationPanel notationPanel = new notationPanel();
         Board board = new Board(notationPanel, user1, user2);
 
-        board.setPreferredSize(new Dimension(board.getTilesizebypixel()*10, board.getTilesizebypixel()*8));
+        //board.setPreferredSize(new Dimension(board.getTilesizebypixel()*10, board.getTilesizebypixel()*8));
+        board.setPreferredSize(new Dimension(900, 700));
 
         JPanel mainPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
