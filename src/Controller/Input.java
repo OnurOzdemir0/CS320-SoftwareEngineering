@@ -21,7 +21,7 @@ public class Input implements MouseListener, MouseMotionListener {
         this.board = board;
         this.originalPoint = new Point();
     }
-
+    
     @Override
     public void mousePressed(MouseEvent e) {
         int col = e.getX() / Board.getTilesizebypixel();
@@ -29,11 +29,12 @@ public class Input implements MouseListener, MouseMotionListener {
 
         selectedPiece = board.getPiece(col, row);
         if (selectedPiece != null && (turnWhite == selectedPiece.isWhite)) {
+        	board.selectedPiece = selectedPiece; //yeni
             originalPoint = new Point(col,row);
         } else if (selectedPiece == null) {
             System.out.println("blank space");
         }
-        board.repaint();
+        board.repaint();     
     }
 
     @Override
@@ -47,14 +48,14 @@ public class Input implements MouseListener, MouseMotionListener {
         if (row < 0) row = 0;
         if (row >= board.rowNumber) row = board.rowNumber - 1;
 
-        if (selectedPiece != null && selectedPiece.isWhite == turnWhite) {
-            Move move = new Move(board, selectedPiece, row, col);
+        if (board.selectedPiece != null && board.selectedPiece.isWhite == turnWhite) {
+            Move move = new Move(board, board.selectedPiece, row, col);
             if(move.playing_piece.isMoveValid(move)){
 
                 if(move.makeMove()) //if can make move then turn changes. some validations are made in makeMove() some in isMoveValid()
                     turnWhite = !turnWhite;
             }
-            selectedPiece = null;
+            board.selectedPiece = null;
             board.repaint();
         }
 
@@ -65,7 +66,7 @@ public class Input implements MouseListener, MouseMotionListener {
         int x = e.getX();
         int y = e.getY();
 
-        if (selectedPiece != null) {
+        if (board.selectedPiece != null) {
             draggingPoint = e.getPoint();
             board.repaint();
         }

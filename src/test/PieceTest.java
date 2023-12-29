@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 public class PieceTest {
-    static Board board = new Board(null);
+    static Board board = new Board(null,null,null);
 
     @Test
     public void testFreeKingMoves(){
