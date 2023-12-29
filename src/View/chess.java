@@ -18,7 +18,7 @@ public class chess {
         frame.getContentPane().setBackground(Color.black);
         frame.setBackground(Color.black);
 
-        notationPanel notationPanel = new notationPanel();
+        notationPanel notationPanel = new notationPanel(user1,user2);
         Board board = new Board(notationPanel, user1, user2);
 
         //board.setPreferredSize(new Dimension(board.getTilesizebypixel()*10, board.getTilesizebypixel()*8));

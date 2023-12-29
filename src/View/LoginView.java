@@ -11,7 +11,8 @@ public class LoginView extends JFrame {
     String username1 = "user1";
     String username2 = "user2";
     private JPanel panel;
-    private JPanel cardPanel ;
+    private JPanel cardPanel;
+    
     public LoginView(){
         JFrame CheT= new JFrame("CheT");
         CheT.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
