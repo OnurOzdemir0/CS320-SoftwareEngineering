@@ -59,6 +59,7 @@ public class BoardTest {
         }
         return false ;
     }
+    
 
     @Test
     void testPiecesNumber() {
@@ -95,10 +96,32 @@ public class BoardTest {
         Assert.assertNull(board.getPiece(1, 1));
         Assert.assertEquals(pawn, board.getPiece(3, 1));
     }
+    @Test
+    void testMakeInvalidMove() {
+
+        Piece rook = board.getPiece(0, 0);
+        Assert.assertNotNull(rook);
 
 
+        Move invalidMove = new Move(board, rook, 2, 2);
+        Assert.assertFalse(rook.isMoveValid(invalidMove));
 
 
+        Assert.assertEquals(rook, board.getPiece(0, 0));
+        Assert.assertNull(board.getPiece(2, 2));
+    }
 
+    @Test
+    void testHighlightValidPositions() {
+
+        Piece pawn = board.getPiece(1, 1);
+        Assert.assertNotNull(pawn);
+
+
+        board.setSelectedPiece(pawn);
+
+
+        board.highlight_valid_positions(board.getGraphics());
+    }
 
 }
