@@ -11,7 +11,7 @@ public class chess {
     /**
      * denemek için yazdım. Ekrana bir frame ve panel göstermekten başka bir şey yapmıyor
      */
-    public static void showAFrame(){
+    public static void showAFrame(String user1, String user2){
     	JFrame frame = new JFrame();
         frame.setTitle("CheT");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -19,9 +19,9 @@ public class chess {
         frame.setBackground(Color.black);
 
         notationPanel notationPanel = new notationPanel();
-        Board board = new Board(notationPanel);
+        Board board = new Board(notationPanel, user1, user2);
 
-        board.setPreferredSize(new Dimension(900, 700));
+        board.setPreferredSize(new Dimension(board.getTilesizebypixel()*10, board.getTilesizebypixel()*8));
 
         JPanel mainPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();

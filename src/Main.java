@@ -6,7 +6,9 @@ import src.View.*;
 
 public class Main {
     public static void main(String[] args) {
-        src.View.chess.showAFrame();
+
+        src.View.LoginView login = new LoginView();
+//        src.View.chess.showAFrame();
     }
     
 

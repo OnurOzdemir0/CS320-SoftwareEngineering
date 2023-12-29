@@ -2,13 +2,13 @@ package src.View;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import src.Model.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
@@ -19,7 +19,7 @@ public class Board extends JPanel{ //this is View.Board, so it should be preoccu
 	public final static int rowNumber = 8;
 	
 	private notationPanel notationPanel;
-
+	private JPanel sidebarPanel;
 	public ArrayList<Piece> pieceList= new ArrayList<>();
 
 	public Piece getPiece(int col, int row) {
@@ -102,13 +102,22 @@ public class Board extends JPanel{ //this is View.Board, so it should be preoccu
 	/**
 	 * This is a JPanel.
 	 */
+	public Board(notationPanel notationPanel, String username1, String username2){
+		this.setPreferredSize(new Dimension(columnNumber*getTilesizebypixel(), rowNumber*getTilesizebypixel()));
+		this.setBackground(Color.gray);
+		this.setLayout(new GridBagLayout());
+		initializePieces();
+		initializeSidebar(username1, username2);
+		this.notationPanel = notationPanel;
+	}
+
 	public Board(notationPanel notationPanel){
 		this.setPreferredSize(new Dimension(columnNumber*getTilesizebypixel(), rowNumber*getTilesizebypixel()));
 		this.setBackground(Color.gray);
 		this.setLayout(new GridBagLayout());
 		initializePieces();
+		initializeSidebar(new String("username1") , new String( "username2"));
 		this.notationPanel = notationPanel;
-
 	}
 
 	@Override
@@ -218,8 +227,13 @@ public class Board extends JPanel{ //this is View.Board, so it should be preoccu
 		}
 	}
 
+	private void initializeSidebar(String username1, String username2) {
+		JLabel usernameLabel1 = new JLabel("Player 1: " + username1);
+		usernameLabel1.setBounds(700, 10, 100, 30);
 
-
+		JLabel usernameLabel2 = new JLabel("Player 2: " + username2);
+		usernameLabel2.setBounds(700, 50, 100, 30);
+	}
 }
 
 

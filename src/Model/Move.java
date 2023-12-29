@@ -61,7 +61,7 @@ public class Move {
                 }
             }
         }
-            return false;
+        return false;
     }
 
     public boolean makeMove(){  //called from move object: move.MakeMove()

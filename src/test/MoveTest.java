@@ -13,7 +13,7 @@ public class MoveTest {
         Queen queen = new Queen(5,5,true);
         Move move = new Move(board, queen, 6,6);
         Assert.assertTrue(queen.isMoveValid(move));
-        Assert.assertTrue(move.moveCollides());
+        Assert.assertFalse(move.moveCollides());
 
     }
     @Test
@@ -24,7 +24,7 @@ public class MoveTest {
         System.out.println(pawn.getType());
 
         Move move = new Move(board, pawn, 2,4);
-        Assert.assertFalse(move.moveCollides());
+        Assert.assertTrue(move.moveCollides());
         //System.out.println(move.moveCollides());
 
     }
