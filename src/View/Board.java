@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Board extends JPanel{ //this is View.Board, so it should be preoccupied with just showing the board.
+public class Board extends JPanel{
 
 	private final static int tileSizeByPixel = 83;
 	public final static int columnNumber = 8;
