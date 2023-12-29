@@ -8,7 +8,7 @@ public class Move {
     int newRow;
     int newColumn;
     
-    Piece playing_piece;
+    public Piece playing_piece;
 	Piece captured_piece;
 
     Board board; //lazım oluyor.
@@ -57,19 +57,22 @@ public class Move {
             return false;
     }
 
-    public void makeMove(Move move){ //perhaps this isn't the perfect class for this method but meh
-        if(move.playing_piece.isMoveValid(move)){ //jesus, this is not optimal
-            if(moveCollides() && move.captured_piece == null){
+    public boolean makeMove(){  //called from move object: move.MakeMove()
+        if(playing_piece.isMoveValid(this)){
+            if(moveCollides() && this.captured_piece == null){
                 System.out.println("move collides but no capture");
             }
-            else if(capturePiece(move)){
-                move.playing_piece.setColumn(move.newColumn);
-                move.playing_piece.setRow(move.newRow);}
-            System.out.println(playing_piece.getType()+" ile "+move.newColumn + " sütununa ve "+move.newRow+" satırına gitmeye çalışıyorsun");
-            move.board.repaint();
+            else if(capturePiece(this)){
+                playing_piece.setColumn(this.newColumn);
+                playing_piece.setRow(this.newRow);}
+            System.out.println(playing_piece.getType()+" ile "+this.newColumn + " sütununa ve "+this.newRow+" satırına gitmeye çalışıyorsun");
+            this.board.repaint();
+            return true;
         }
-        else
-            System.out.println("move not valid for: "+move.playing_piece.getType());
+        else {
+            System.out.println("move not valid for: " + this.playing_piece.getType());
+            return false;
+        }
     }
 
     /**

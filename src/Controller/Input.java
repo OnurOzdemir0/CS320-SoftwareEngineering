@@ -23,13 +23,13 @@ public class Input implements MouseListener, MouseMotionListener {
     }
 
     @Override
-    public void mousePressed(MouseEvent e) { //bu tıklandığı zaman "selectedPiece" doğru tanımlanmış oluyor
+    public void mousePressed(MouseEvent e) {
         int col = e.getX() / Board.getTilesizebypixel();
         int row = e.getY() / Board.getTilesizebypixel();
 
         selectedPiece = board.getPiece(col, row);
         if (selectedPiece != null && (turnWhite == selectedPiece.isWhite)) {
-            originalPoint = new Point(col,row); //ne yapıyor ki burası?
+            originalPoint = new Point(col,row);
         } else if (selectedPiece == null) {
             System.out.println("blank space");
         }
@@ -47,19 +47,12 @@ public class Input implements MouseListener, MouseMotionListener {
         if (row < 0) row = 0;
         if (row >= board.rowNumber) row = board.rowNumber - 1;
 
-        System.out.println("okuduğum satır: "+row+ " sütun: "+col);
-
-        if (selectedPiece != null ) {
-
+        if (selectedPiece != null && selectedPiece.isWhite == turnWhite) {
             Move move = new Move(board, selectedPiece, row, col);
-
-            //if(selectedPiece.isMoveValid(move)) {
-            if(true) {
-                //Move move = new Move(board, selectedPiece, row, col);
-                move.makeMove(move);
+            if(move.playing_piece.isMoveValid(move)){
+                move.makeMove();
+                turnWhite = !turnWhite;
             }
-            //System.out.println(selectedPiece.getType());
-
             selectedPiece = null;
             board.repaint();
         }
@@ -74,24 +67,6 @@ public class Input implements MouseListener, MouseMotionListener {
         if (selectedPiece != null) {
             draggingPoint = e.getPoint();
             board.repaint();
-        }
-    }
-
-   // public void paint(Graphics g) {
-     //   if (selectedPiece != null) {
-
-      //  }
-    //}
-
-    public void paint(Graphics g) {
-        if (selectedPiece != null) {
-            if (draggingPoint != null) {
-                g.drawImage(selectedPiece.getPieceImage(), draggingPoint.x, draggingPoint.y, null);
-            } else {
-                g.drawImage(selectedPiece.getPieceImage(),
-                        originalPoint.x * Board.getTilesizebypixel(),
-                        originalPoint.y * Board.getTilesizebypixel(), null);
-            }
         }
     }
 
@@ -117,7 +92,7 @@ public class Input implements MouseListener, MouseMotionListener {
             int row = e.getY() / Board.getTilesizebypixel();
 
 
-            System.out.println("Mouse moved to position - Col: " + col + ", Row: " + row);
+//            System.out.println("Mouse moved to position - Col: " + col + ", Row: " + row);
         }
 
 }
