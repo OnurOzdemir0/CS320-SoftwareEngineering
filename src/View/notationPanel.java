@@ -23,7 +23,11 @@ public class notationPanel extends JPanel{
         add(scrollPane, BorderLayout.CENTER);
     }
 
-    public void addMoveNotation(String notation) {
+	public notationPanel() {
+
+	}
+
+	public void addMoveNotation(String notation) {
     	if(turn%2==0) {
     		notationTextArea.append(user1 + ": " + notation + "\n");
     		this.turn++;
