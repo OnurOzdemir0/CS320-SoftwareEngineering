@@ -56,5 +56,8 @@ public class Piece {
 	public boolean isMoveValid(Move move) {
 		return true; 
 	}
-	
+
+    public int getCol() {
+        return 0;
+    }
 }

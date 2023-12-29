@@ -22,6 +22,10 @@ public class Board extends JPanel{ //this is View.Board, so it should be preoccu
 	private JPanel sidebarPanel;
 	public ArrayList<Piece> pieceList= new ArrayList<>();
 
+	public Board() {
+
+	}
+
 	public Piece getPiece(int col, int row) {
 		for(Piece piece:pieceList) {
 			if(piece.getColumn()==col && piece.getRow()==row){
