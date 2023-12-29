@@ -16,7 +16,11 @@ public class Board extends JPanel{
 	private final static int tileSizeByPixel = 83;
 	public final static int columnNumber = 8;
 	public final static int rowNumber = 8;
-	
+
+	public void setSelectedPiece(Piece selectedPiece) {
+		this.selectedPiece = selectedPiece;
+	}
+
 	public Piece selectedPiece;
 	public notationPanel notationPanel;
 	private JPanel sidebarPanel;
