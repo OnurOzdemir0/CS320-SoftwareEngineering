@@ -28,9 +28,6 @@ public class Move {
             return (board.getPiece(newColumn, newRow) != null); //at yalnızca varağında bir taş varsa "collide" ediyor.
         }
 
-        if(captured_piece != null && captured_piece.type == Type.King)
-            return true;
-
         int smallRow = Math.min(oldRow, newRow);
         int bigRow = Math.max(oldRow, newRow);
         int smallColumn = Math.min(oldColumn, newColumn);
@@ -75,7 +72,10 @@ public class Move {
             else if(capturePiece(this)){
                 playing_piece.setColumn(this.newColumn);
                 playing_piece.setRow(this.newRow);}
-//            System.out.println(playing_piece.getType()+" ile "+this.newColumn + " sütununa ve "+this.newRow+" satırına gitmeye çalışıyorsun");
+            else{
+                return false;
+            }
+
             this.board.repaint();
             return true;
         }
@@ -92,7 +92,7 @@ public class Move {
      */
     public boolean capturePiece(Move move){
         if(captured_piece != null){
-                if(captured_piece.isWhite ^ move.playing_piece.isWhite){ //so if their colours are not the same, meaning the one can actually capture the other
+                if(captured_piece.isWhite ^ move.playing_piece.isWhite && captured_piece.type != Type.King){ //so if their colours are not the same, meaning the one can actually capture the other
                     this.board.pieceList.remove(captured_piece);
                     return true;
                 }
