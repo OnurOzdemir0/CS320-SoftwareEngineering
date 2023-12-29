@@ -45,26 +45,28 @@ public class Pawn extends Piece{
      * @return
      */
     public boolean isMoveValid(Move move){
-        System.out.println("çağırdım");
         if(isWhite && move.newRow>move.oldRow) return false; //pawn cannot return. Full stop.
         if(!isWhite && move.newRow<move.oldRow) return false; //this looks inverted, but is really not.
 
 
         if(Math.abs(move.newColumn - move.oldColumn)==1 && Math.abs(move.newRow - move.oldRow)==1){ //yani ki çaprazsa
             System.out.println("çapraz");
+
             if(move.captured_piece == null)
                 return false;
             else
                 return isWhite ^ move.captured_piece.isWhite;
         }
-        else{
-            System.out.println("doğru");
-            boolean firstMove;
-            if(isWhite){firstMove= move.oldRow == 6;}
-            else{firstMove = move.oldRow == 1;}
+        else
+        {
+            boolean firstMove = isWhite? move.oldRow == 6 : move.oldRow == 1; //white checks for 6, black checks for 1
 
-            if(!firstMove){return Math.abs(move.newRow-move.oldRow) == 1 && (move.captured_piece == null);}
-            else return Math.abs(move.newRow-move.oldRow) ==2 || Math.abs(move.newRow-move.oldRow) ==1 && (move.captured_piece == null);
+            if(!firstMove)
+                return Math.abs(move.newRow-move.oldRow) == 1 &&
+                        move.newColumn == move.oldColumn &&         //make sure same column
+                        move.captured_piece == null;
+            else
+                return Math.abs(move.newRow-move.oldRow) ==2 || Math.abs(move.newRow-move.oldRow) ==1 && (move.captured_piece == null && move.newColumn == move.oldColumn);
         }
 
     }
