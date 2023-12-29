@@ -60,6 +60,17 @@ public class Input implements MouseListener, MouseMotionListener {
         }
 
     }
+    public void paint(Graphics g) {
+        if (selectedPiece != null) {
+            if (draggingPoint != null) {
+                g.drawImage(selectedPiece.getPieceImage(), draggingPoint.x, draggingPoint.y, null);
+            } else {
+                g.drawImage(selectedPiece.getPieceImage(),
+                        originalPoint.x * Board.getTilesizebypixel(),
+                        originalPoint.y * Board.getTilesizebypixel(), null);
+            }
+        }
+    }
 
     @Override
     public void mouseDragged(MouseEvent e) {
