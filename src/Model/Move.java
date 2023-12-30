@@ -49,7 +49,7 @@ public class Move {
 
     public boolean moveCollides(){
         if(this.playing_piece.getType() == Type.Knight) {
-            return (board.getPiece(newColumn, newRow) != null); //at yalnızca varağında bir taş varsa "collide" ediyor.
+            return false;
         }
 
         int smallRow = Math.min(oldRow, newRow);
