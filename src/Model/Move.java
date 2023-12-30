@@ -20,7 +20,7 @@ public class Move {
 		int newRow= 8-move.newRow;
 		if( move.playing_piece.type.name().equals("Knight")) {
 			if(move.captured_piece==null) {
-				return "N" + newCol + move.newRow;
+				return "N" + newCol + newRow;
 			}
 			else {
 				return "N" + "x" + newCol + newRow;
