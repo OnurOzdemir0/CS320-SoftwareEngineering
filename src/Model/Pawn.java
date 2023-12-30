@@ -50,7 +50,7 @@ public class Pawn extends Piece{
 
 
         if(Math.abs(move.newColumn - move.oldColumn)==1 && Math.abs(move.newRow - move.oldRow)==1){ //yani ki çaprazsa
-            System.out.println("çapraz");
+//            System.out.println("çapraz");
 
             if(move.captured_piece == null)
                 return false;
