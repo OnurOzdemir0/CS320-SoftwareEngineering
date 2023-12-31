@@ -10,8 +10,6 @@ import src.Model.Move;
 
 import org.junit.Assert;
 
-
-
 public class BoardTest {
 
     private Board board;
