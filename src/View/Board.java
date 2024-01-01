@@ -17,13 +17,9 @@ public class Board extends JPanel{
 	public final static int columnNumber = 8;
 	public final static int rowNumber = 8;
 
-	public void setSelectedPiece(Piece selectedPiece) {
-		this.selectedPiece = selectedPiece;
-	}
 
 	public Piece selectedPiece;
 	public notationPanel notationPanel;
-	private JPanel sidebarPanel;
 	public ArrayList<Piece> pieceList= new ArrayList<>();
 
 	public Board() {
@@ -53,7 +49,6 @@ public class Board extends JPanel{
 		this.setBackground(Color.gray);
 		this.setLayout(new GridBagLayout());
 		initializePieces();
-		initializeSidebar(username1, username2);
 		this.notationPanel = notationPanel;
 	}
 
@@ -62,7 +57,6 @@ public class Board extends JPanel{
 		this.setBackground(Color.gray);
 		this.setLayout(new GridBagLayout());
 		initializePieces();
-		initializeSidebar(new String("username1") , new String( "username2"));
 		this.notationPanel = notationPanel;
 	}
 
@@ -176,14 +170,6 @@ public class Board extends JPanel{
 		}
 	}
 
-
-	private void initializeSidebar(String username1, String username2) {
-		JLabel usernameLabel1 = new JLabel("Player 1: " + username1);
-		usernameLabel1.setBounds(700, 10, 100, 30);
-
-		JLabel usernameLabel2 = new JLabel("Player 2: " + username2);
-		usernameLabel2.setBounds(700, 50, 100, 30);
-	}
 	
 public void highlight_valid_positions(Graphics g){
 		
