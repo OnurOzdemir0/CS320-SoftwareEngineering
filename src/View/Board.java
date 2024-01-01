@@ -67,7 +67,7 @@ public class Board extends JPanel{
 	}
 
 	@Override
-	protected void paintComponent(Graphics g) {
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		paintBoard(g);
 		drawPieces(g);
@@ -159,7 +159,9 @@ public class Board extends JPanel{
 		}
 	}
 
-	private void drawPieces(Graphics g) {
+
+
+	public void drawPieces(Graphics g) {
 		for (Piece piece : pieceList) {
 			if (piece.getPieceImage() != null) {
 				int x = piece.getColumn() * tileSizeByPixel;
@@ -173,6 +175,7 @@ public class Board extends JPanel{
 			}
 		}
 	}
+
 
 	private void initializeSidebar(String username1, String username2) {
 		JLabel usernameLabel1 = new JLabel("Player 1: " + username1);

@@ -1,6 +1,9 @@
 package src.test;
 import org.junit.Test;
 import src.View.Board;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import src.Model.*;
 import src.View.*;
@@ -123,5 +126,48 @@ public class BoardTest {
 
         board.highlight_valid_positions(board.getGraphics());
     }
+
+    @Test
+    void testPaintComponent() {
+        Board board = new Board(); // Board sınıfını oluşturuyoruz.
+
+        // paintComponent metodunu çağırarak elde edilen renkleri string olarak alıyoruz.
+        BufferedImage image = new BufferedImage(600, 600, BufferedImage.TYPE_INT_RGB);
+        Graphics g = image.getGraphics();
+        board.paintComponent(g);
+        g.dispose();
+
+        // Beklenen renk kontrolü
+        Assert.assertEquals(new Color(247, 213, 168), new Color(image.getRGB(0, 0))); // Örnek bir kontrol noktası
+    }
+
+    @Test
+    void testPaintBoard() {
+        Board board = new Board(); // Board sınıfını oluşturuyoruz.
+
+        // paintBoard metodunu çağırarak elde edilen renkleri string olarak alıyoruz.
+        BufferedImage image = new BufferedImage(600, 600, BufferedImage.TYPE_INT_RGB);
+        Graphics g = image.getGraphics();
+        board.paintBoard(g);
+        g.dispose();
+
+        // Beklenen renk kontrolü
+        Assert.assertEquals(new Color(247, 213, 168), new Color(image.getRGB(0, 0))); // Örnek bir kontrol noktası
+    }
+
+    @Test
+    void testDrawPieces() {
+        Board board = new Board(); // Board sınıfını oluşturuyoruz.
+
+        // drawPieces metodunu çağırarak elde edilen renkleri string olarak alıyoruz.
+        BufferedImage image = new BufferedImage(600, 600, BufferedImage.TYPE_INT_RGB);
+        Graphics g = image.getGraphics();
+        board.drawPieces(g);
+        g.dispose();
+
+        // Beklenen renk kontrolü
+        Assert.assertEquals(new Color(247, 213, 168), new Color(image.getRGB(0, 0))); // Örnek bir kontrol noktası
+    }
+
 
 }
