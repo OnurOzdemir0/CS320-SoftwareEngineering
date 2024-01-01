@@ -135,7 +135,7 @@ public class BoardTest {
         board.paintComponent(g);
         g.dispose();
 
-        // Beklenen renk kontrolü
+        // renk kontrolü
         Assert.assertEquals(new Color(247, 213, 168), new Color(image.getRGB(0, 0))); // Örnek bir kontrol noktası
     }
 
@@ -149,7 +149,7 @@ public class BoardTest {
         board.paintBoard(g);
         g.dispose();
 
-        // Beklenen renk kontrolü
+        //  renk kontrolü
         Assert.assertEquals(new Color(247, 213, 168), new Color(image.getRGB(0, 0))); // Örnek bir kontrol noktası
     }
 
@@ -157,13 +157,13 @@ public class BoardTest {
     void testDrawPieces() {
         Board board = new Board(); // Board sınıfını oluşturuyoruz.
 
-        // drawPieces metodunu çağırarak elde edilen renkleri string olarak alıyoruz.
+        // drawPieces metodunu çağırarak  elde edilen renkleri string olarak alıyoruz.
         BufferedImage image = new BufferedImage(600, 600, BufferedImage.TYPE_INT_RGB);
         Graphics g = image.getGraphics();
         board.drawPieces(g);
         g.dispose();
 
-        // Beklenen renk kontrolü
+        //  renk kontrolü
         Assert.assertEquals(new Color(247, 213, 168), new Color(image.getRGB(0, 0))); // Örnek bir kontrol noktası
     }
 
