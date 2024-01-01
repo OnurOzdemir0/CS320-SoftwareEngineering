@@ -1,24 +1,21 @@
 package src.test;
 import org.junit.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+
 import src.View.Board;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
-
-import src.Controller.Input;
 import src.Model.*;
 import org.junit.Assert;
 
 public class BoardTest {
 
-    //private Board board;
     private Board board_real=new Board(null,null,null);
     ArrayList<Piece> initialSetup = new ArrayList<>();
     private BufferedImage image = new BufferedImage(800, 800, BufferedImage.TYPE_INT_RGB);
@@ -95,35 +92,33 @@ public class BoardTest {
     }
 
 
-    @Test
-    public void testDrawPieces() throws IOException {
+    @ParameterizedTest
+    public void testDrawPieces(Graphics2D g2d){
     	
-    	 BufferedImage actualRookImage = new BufferedImage(
-         Board.columnNumber * Board.getTilesizebypixel(),
-         Board.rowNumber * Board.getTilesizebypixel(),
-         BufferedImage.TYPE_INT_ARGB);
+    	Board board = new Board(null,null,null);
+        board.initializePieces();
+    	BufferedImage boardImage = new BufferedImage(
+                Board.columnNumber * Board.getTilesizebypixel(),
+                Board.rowNumber * Board.getTilesizebypixel(),
+                BufferedImage.TYPE_INT_ARGB);
 
-         Graphics g = actualRookImage.getGraphics();
-         board_real.drawPieces(g);
-         g.dispose();
-
-     
-        Piece black_rook = board_real.getPiece(0, 0);
+        Graphics g = boardImage.getGraphics();
+        board.paintComponent(g);
+        g.dispose();
         
-        BufferedImage allPiecesImage = ImageIO.read(getSystemResourceAsStream("src/View/pieces.png"));
-		int pieceWidth = allPiecesImage.getWidth() / 6; // There are 6 pieces in a row
-		int pieceHeight = allPiecesImage.getHeight() / 2; // There are 2 rows for each color
-		
-		BufferedImage expectedRookImage = allPiecesImage.getSubimage(0, 0, pieceWidth, pieceHeight);
- 
-
-        // Assert that the two images are the same
-        Assert.assertTrue(imagesAreEqual(expectedRookImage, actualRookImage));
-
-		BufferedImage pieceImage = allPiecesImage.getSubimage(0, 0, pieceWidth, pieceHeight);
-		
-        Image black_rook_image = black_rook.getPieceImage().getScaledInstance(Board.getTilesizebypixel(), Board.getTilesizebypixel(), Image.SCALE_SMOOTH);
+        BufferedImage paintedBoardImage=boardImage.getSubimage(0, 0, Board.getTilesizebypixel(), Board.getTilesizebypixel());
         
+        try {
+        	BufferedImage allPiecesImage = ImageIO.read(getSystemResourceAsStream("src/View/pieces.png"));
+        	int pieceWidth = allPiecesImage.getWidth() / 6; // There are 6 pieces in a row
+        	int pieceHeight = allPiecesImage.getHeight() / 2; // There are 2 rows for each color
+        	BufferedImage expectedRookImage = (BufferedImage)allPiecesImage.getSubimage(0, 0, pieceWidth, pieceHeight).getScaledInstance(Board.getTilesizebypixel(), Board.getTilesizebypixel(), Image.SCALE_SMOOTH);;
+        	Assert.assertTrue(imagesAreEqual(expectedRookImage, paintedBoardImage));
+        }
+        catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 
     }
     

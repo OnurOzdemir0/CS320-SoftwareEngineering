@@ -69,7 +69,7 @@ public class Board extends JPanel{
 	}
 
 
-	private void initializePieces() {
+	public void initializePieces() {
 		
 		//create all the pieces and add them list
 		pieceList.add(new Rook(0, 0, false));
