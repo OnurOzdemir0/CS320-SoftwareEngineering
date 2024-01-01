@@ -19,7 +19,7 @@ public class BoardTest {
 
 
     @Test
-    public void testInitialSetup() {
+    public void testInitialSetup() { //GEÇTİ GÖZÜKÜYO
         ArrayList<Piece> initialSetup = new ArrayList<>();
 
         initialSetup.add(new King(0, 4, false));
@@ -126,7 +126,7 @@ public class BoardTest {
     }
 
     @Test
-    void testPaintComponent() {
+   public void testPaintComponent() { //GEÇTİ
         Board board = new Board(); // Board sınıfını oluşturuyoruz.
 
         // paintComponent metodunu çağırarak elde edilen renkleri string olarak alıyoruz.
@@ -140,7 +140,7 @@ public class BoardTest {
     }
 
     @Test
-    void testPaintBoard() {
+    public void testPaintBoard() { //GEÇTİ
         Board board = new Board(); // Board sınıfını oluşturuyoruz.
 
         // paintBoard metodunu çağırarak elde edilen renkleri string olarak alıyoruz.
@@ -153,18 +153,27 @@ public class BoardTest {
         Assert.assertEquals(new Color(247, 213, 168), new Color(image.getRGB(0, 0))); // Örnek bir kontrol noktası
     }
 
+
     @Test
-    void testDrawPieces() {
+    public void testDrawPieces() {
         Board board = new Board(); // Board sınıfını oluşturuyoruz.
 
-        // drawPieces metodunu çağırarak  elde edilen renkleri string olarak alıyoruz.
+        // Örnek bir taş oluşturuyoruz ve tahtaya ekliyoruz
+        Piece samplePiece = new Rook(0, 0, false);
+        board.pieceList.add(samplePiece);
+
+        // drawPieces metodunu çağırarak tahtanın belirli bir konumunu elde ediyoruz
         BufferedImage image = new BufferedImage(600, 600, BufferedImage.TYPE_INT_RGB);
         Graphics g = image.getGraphics();
         board.drawPieces(g);
         g.dispose();
 
-        //  renk kontrolü
-        Assert.assertEquals(new Color(247, 213, 168), new Color(image.getRGB(0, 0))); // Örnek bir kontrol noktası
+        // Belirli bir konumda taşın beklenen rengini kontrol ediyoruz
+        Color expectedColor = new Color(247, 213, 168);
+        Color actualColor = new Color(image.getRGB(samplePiece.getColumn() * 83, samplePiece.getRow() * 83));
+
+        // Renk kontrolü
+        Assert.assertEquals(expectedColor, actualColor);
     }
 
 
