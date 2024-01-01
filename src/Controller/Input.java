@@ -13,9 +13,9 @@ public class Input implements MouseListener, MouseMotionListener {
     private boolean turnWhite = true;
 
     private Board board;
-    private Piece selectedPiece;
-    private Point draggingPoint;
-    private Point originalPoint;
+    public Piece selectedPiece;
+    public Point draggingPoint;
+    public Point originalPoint;
 
     public Input(Board board) {
         this.board = board;
@@ -34,7 +34,7 @@ public class Input implements MouseListener, MouseMotionListener {
         } else if (selectedPiece == null) {
             System.out.println("blank space");
         }
-        board.repaint();     
+        board.repaint();
     }
 
     @Override
