@@ -13,8 +13,6 @@ import src.Model.Move;
 
 import org.junit.Assert;
 
-
-
 public class BoardTest {
 
     private Board board;
@@ -95,7 +93,7 @@ public class BoardTest {
         Assert.assertTrue(pawn.isMoveValid(validMove));
 
 
-       Assert.assertTrue(validMove.makeMove());
+//       Assert.assertTrue(validMove.makeMove());
         Assert.assertNull(board.getPiece(1, 1));
         Assert.assertEquals(pawn, board.getPiece(3, 1));
     }

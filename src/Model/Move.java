@@ -20,7 +20,7 @@ public class Move {
 		int newRow= 8-move.newRow;
 		if( move.playing_piece.type.name().equals("Knight")) {
 			if(move.captured_piece==null) {
-				return "N" + newCol + move.newRow;
+				return "N" + newCol + newRow;
 			}
 			else {
 				return "N" + "x" + newCol + newRow;
@@ -49,7 +49,7 @@ public class Move {
 
     public boolean moveCollides(){
         if(this.playing_piece.getType() == Type.Knight) {
-            return (board.getPiece(newColumn, newRow) != null); //at yalnızca varağında bir taş varsa "collide" ediyor.
+            return false;
         }
 
         int smallRow = Math.min(oldRow, newRow);
@@ -88,27 +88,41 @@ public class Move {
         return false;
     }
 
-    public boolean makeMove(){  //called from move object: move.MakeMove()
-        if(playing_piece.isMoveValid(this)){
-        	board.notationPanel.addMoveNotation(getMoveNotation(this));
-            if(moveCollides() && this.captured_piece == null){
-                System.out.println("move collides but no capture");
-            }
-            else if(capturePiece(this)){
-                playing_piece.setColumn(this.newColumn);
-                playing_piece.setRow(this.newRow);}
-            else{
-                return false;
-            }
-
-            this.board.repaint();
-            return true;
-        }
-        else {
-            System.out.println("move not valid for: " + this.playing_piece.getType());
+    public boolean canMove() { //separated this part from makeMove to also use in different places
+        if (!this.playing_piece.isMoveValid(this)) {
             return false;
         }
+
+        if (this.moveCollides()) {
+            System.out.println("Move path collides");
+            return false;
+        }
+
+        if (this.captured_piece != null && this.captured_piece.isWhite == this.playing_piece.isWhite) {
+            return false;
+        }
+
+        // check();
+
+        return true;
     }
+
+    public void makeMove(){
+        if (!canMove()) {
+            return;
+        }
+
+        if (this.captured_piece != null) {
+            capturePiece(this);
+        }
+
+        this.playing_piece.setRow(this.newRow);
+        this.playing_piece.setColumn(this.newColumn);
+
+        board.notationPanel.addMoveNotation(getMoveNotation(this));
+        this.board.repaint();
+    }
+
 
     /**
      *

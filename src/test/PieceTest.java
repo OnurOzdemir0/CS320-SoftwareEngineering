@@ -48,13 +48,13 @@ public class PieceTest {
 
     @Test
     public void testPawn(){ //this is a hideous way of testing this.
-        Pawn kingPawn1 = new Pawn(1,5,true); //beyaz şah piyonu
-        Pawn kingPawn2 = new Pawn(2,5,true); //beyaz şah piyonu ama bir oynamış
+        Pawn kingPawn1 = new Pawn(6,4,true); //beyaz şah piyonu
+        Pawn kingPawn2 = new Pawn(5,4,true); //beyaz şah piyonu ama bir oynamış
 
-        Move move11 = new Move(board, kingPawn1, 2, 5);
-        Move move12 = new Move(board, kingPawn1, 3, 5);
-        Move move21 = new Move(board, kingPawn2, 3, 5);
-        Move move22 = new Move(board, kingPawn2, 4, 5);
+        Move move11 = new Move(board, kingPawn1, 5, 4);
+        Move move12 = new Move(board, kingPawn1, 4, 4);
+        Move move21 = new Move(board, kingPawn2, 4, 4);
+        Move move22 = new Move(board, kingPawn2, 3, 4);
 
         assertTrue(kingPawn1.isMoveValid(move11));
         assertTrue(kingPawn1.isMoveValid(move12));
@@ -64,5 +64,55 @@ public class PieceTest {
         Move changeColumn = new Move(board, kingPawn1, 3, 4);
         assertFalse(kingPawn1.isMoveValid(changeColumn));
 
+    }
+    
+    @Test
+    public void testRook(){ 
+        Rook rook_white = new Rook(7,0,true); //beyaz kale 
+        
+        ArrayList<Move> moves_for_white = new ArrayList<>();
+        moves_for_white.add(new Move(board, rook_white, 6, 0));
+        moves_for_white.add(new Move(board, rook_white, 0, 0));
+        moves_for_white.add(new Move(board, rook_white, 7, 1));
+        moves_for_white.add(new Move(board, rook_white, 7, 7));
+        
+        for(Move move : moves_for_white) 
+            assertTrue(rook_white.isMoveValid(move));
+        
+        Rook rook_black = new Rook(0,0,false); //siyah kale
+        ArrayList<Move> moves_for_black = new ArrayList<>();
+        
+        moves_for_black.add(new Move(board, rook_black, 0, 1));
+        moves_for_black.add(new Move(board, rook_black, 0, 7));
+        moves_for_black.add(new Move(board, rook_black, 1, 0));
+        moves_for_black.add(new Move(board, rook_black, 7, 0));
+
+        for(Move move : moves_for_black) 
+            assertTrue(rook_black.isMoveValid(move)); 	
+    }
+    
+    @Test
+    public void testQueen(){ 
+        Queen black_queen = new Queen(0,3,false); //siyah vezir 
+        
+        ArrayList<Move> moves = new ArrayList<>(); // geçerli hamleler
+        moves.add(new Move(board, black_queen, 0, 4));
+        moves.add(new Move(board, black_queen, 0, 7));
+        moves.add(new Move(board, black_queen, 3, 0));
+        moves.add(new Move(board, black_queen, 4, 7));
+        
+        for(Move move : moves) 
+            assertTrue(black_queen.isMoveValid(move)); 
+        
+        Queen white_queen = new Queen(7,3,true); //beyaz vezir 
+        
+        ArrayList<Move> moves2 = new ArrayList<>(); // geçersiz hamleler
+        moves2.add(new Move(board, white_queen, 5, 4));
+        moves2.add(new Move(board, white_queen, 0, 5));
+        moves2.add(new Move(board, white_queen, 2, 6));
+        moves2.add(new Move(board, white_queen, 1, 2));
+        
+        for(Move move : moves2) 
+            assertFalse(white_queen.isMoveValid(move));  
     }
 }

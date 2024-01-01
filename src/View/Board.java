@@ -188,17 +188,18 @@ public class Board extends JPanel{
 public void highlight_valid_positions(Graphics g){
 		
 		Graphics2D g2d = (Graphics2D) g;
-		
+
 		if(selectedPiece!=null) {
-			for (int r = 0; r < rowNumber; r++){
-				for (int c = 0; c < columnNumber; c++){
-					if(selectedPiece.isMoveValid(new Move(this,selectedPiece,r,c))) {
+			for (int r = 0; r < 8; r++){
+				for (int c = 0; c < 8; c++){
+					Move move = new Move(this,selectedPiece,r,c);
+
+					if(move.canMove()){
 						g2d.setColor(new Color(82, 252, 3, 80));
-						g2d.fillRect(c*tileSizeByPixel, r*tileSizeByPixel, tileSizeByPixel, tileSizeByPixel);
+						g2d.fillRect(c*tileSizeByPixel, r * tileSizeByPixel, tileSizeByPixel, tileSizeByPixel);
 					}
 				}
 			}
-			
 		}
 	}
 	
