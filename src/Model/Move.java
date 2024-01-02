@@ -88,7 +88,65 @@ public class Move {
         return false;
     }
 
-    public boolean canMove() { //separated this part from makeMove to also use in different places
+    private int[] findKingPosition(boolean isWhite) {
+        for (Piece piece : board.pieceList) {
+            if (piece instanceof King && piece.isWhite == isWhite) {
+                return new int[]{piece.getRow(), piece.getColumn()};
+            }
+        }
+        return null;
+    }
+
+    public boolean isCheck(boolean isWhite) {
+        int[] kingPosition = findKingPosition(isWhite);
+        for (Piece piece : board.pieceList) {
+            if (piece.isWhite != isWhite) {
+                Move testMove = new Move(board, piece, kingPosition[0], kingPosition[1]);
+                if (testMove.moveCollides() == false && piece.isMoveValid(testMove)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean isCheckmate(boolean isWhite) {
+        if (!isCheck(isWhite)) {
+            return false;
+        }
+
+        for (Piece piece : board.pieceList) {
+            if (piece.isWhite == isWhite) {
+                int originalRow = piece.getRow();
+                int originalColumn = piece.getColumn();
+
+                // Try all possible moves for this piece
+                for (int newRow = 0; newRow < Board.rowNumber; newRow++) {
+                    for (int newColumn = 0; newColumn < Board.columnNumber; newColumn++) {
+                        Move testMove = new Move(board, piece, newRow, newColumn);
+                        if (piece.isMoveValid(testMove) && !testMove.moveCollides()) {
+                            piece.setRow(newRow);
+                            piece.setColumn(newColumn);
+
+                            boolean stillInCheck = isCheck(isWhite);
+
+                            piece.setRow(originalRow);
+                            piece.setColumn(originalColumn);
+
+                            if (!stillInCheck) {
+                                return false; // Found a move to escape check
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+
+    public boolean canMove() {
         if (!this.playing_piece.isMoveValid(this)) {
             return false;
         }
@@ -102,10 +160,32 @@ public class Move {
             return false;
         }
 
-        // check();
+        Piece tempCaptured = this.captured_piece;
+        int tempRow = playing_piece.getRow();
+        int tempColumn = playing_piece.getColumn();
+
+        this.playing_piece.setRow(this.newRow);
+        this.playing_piece.setColumn(this.newColumn);
+        if (tempCaptured != null) {
+            board.pieceList.remove(tempCaptured);
+        }
+
+        boolean inCheck = isCheck(this.playing_piece.isWhite);
+
+        this.playing_piece.setRow(tempRow);
+        this.playing_piece.setColumn(tempColumn);
+        if (tempCaptured != null) {
+            board.pieceList.add(tempCaptured);
+        }
+
+        if (inCheck) {
+            System.out.println("Move puts king in check");
+            return false;
+        }
 
         return true;
     }
+
 
     public void makeMove(){
         if (!canMove()) {
@@ -121,6 +201,11 @@ public class Move {
 
         board.notationPanel.addMoveNotation(getMoveNotation(this));
         this.board.repaint();
+
+        if (isCheckmate(!this.playing_piece.isWhite)) {
+            //end game
+            System.out.println("Checkmate! " + (this.playing_piece.isWhite ? "Black" : "White") + " wins.");
+        }
     }
 
 
