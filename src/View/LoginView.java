@@ -7,12 +7,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginView extends JFrame {
-    private JTextField t_username1;
-    private JTextField t_username2 ;
+    public JTextField t_username1;
+    public JTextField t_username2 ;
     String username1 = "Player1";
     String username2 = "Player2";
     private JPanel panel;
     private JPanel cardPanel;
+
+    public JButton ok1 = new JButton("Start Game");
     
     public LoginView(){
         JFrame CheT= new JFrame("CheT");
@@ -31,7 +33,6 @@ public class LoginView extends JFrame {
         CardLayout cardLayout = new CardLayout();
         cardPanel= new JPanel (cardLayout);
 
-        JButton ok1= new JButton("Start Game");
         ok1.setBounds(250,500,300,100);
         ok1.addActionListener(new ActionListener(){
             @Override
@@ -53,8 +54,6 @@ public class LoginView extends JFrame {
             }
         });
 
-
-
         panel.add(loginLabel);
         panel.add(t_username1);
         panel.add(ok1);
@@ -63,5 +62,12 @@ public class LoginView extends JFrame {
         CheT.add(panel);
         CheT.setVisible(true);
 }
+    public String getUsername1() {
+        return username1;
+    }
+
+    public String getUsername2() {
+        return username2;
+    }
 }
 
