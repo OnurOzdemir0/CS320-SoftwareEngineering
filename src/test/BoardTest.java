@@ -1,16 +1,20 @@
 package src.test;
 import org.junit.Test;
-import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.*;
+import src.View.LoginView;
 import src.View.notationPanel;
 import src.View.Board;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 import java.awt.*;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import javax.swing.*;
+
 import src.Model.*;
 import org.junit.Assert;
 
@@ -194,6 +198,17 @@ public class BoardTest {
         String expectedLastMove = "Player2: Move999\n";
         Assert.assertTrue(actualText.contains(expectedLastMove));
 
+    }
+
+    @Test
+    public void testCheck(){
+        King king = board_real.getKing(true);
+    }
+
+    @Test
+    public void testManual(){
+        Board b = new Board(null,null,null);
+        Assert.assertTrue(b.isVisible());
     }
 }
 
