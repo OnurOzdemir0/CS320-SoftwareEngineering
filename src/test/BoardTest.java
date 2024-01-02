@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import src.Controller.Input;
 import src.Model.*;
 import org.junit.Assert;
 
@@ -197,6 +198,25 @@ public class BoardTest {
         String expectedLastMove = "Player2: Move99\n";
         Assert.assertTrue(actualText.contains(expectedLastMove));
     //T-SRS-CheT-004
+    }
+    
+    @Test
+    public void testHighlightValidPositions() {
+
+        Piece pawn = board_real.getPiece(1, 1);
+        Assert.assertNotNull(pawn);
+        
+        Input input = new Input(board_real);
+
+        MouseEvent mousePressedEvent = new MouseEvent(board_real, MouseEvent.MOUSE_PRESSED, System.currentTimeMillis(), 0,
+        			Board.getTilesizebypixel(), Board.getTilesizebypixel(), 0, false);
+        
+        input.mousePressed(mousePressedEvent);
+        
+        Color highlightedSquareColor = board_real.getSquareColor(2 * Board.getTilesizebypixel(), 1 * Board.getTilesizebypixel());
+        
+        Assert.assertEquals(new Color(82, 252, 3, 80), highlightedSquareColor);
+
     }
 
 

@@ -152,6 +152,14 @@ public class Board extends JPanel{
 			g.drawString(String.valueOf(number), 8 * tileSizeByPixel - 15, row * tileSizeByPixel + tileSizeByPixel / 2 + 5);
 		}
 	}
+	
+	public Color getSquareColor(int x, int y) {
+	    BufferedImage buffer = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+	    Graphics2D g2d = buffer.createGraphics();
+	    paintBoard(g2d);
+	    g2d.dispose();
+	    return new Color(buffer.getRGB(x, y), true);
+	}
 
 
 
