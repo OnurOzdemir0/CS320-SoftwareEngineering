@@ -1,7 +1,7 @@
 package src.test;
 import org.junit.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-
+import src.View.notationPanel;
 import src.View.Board;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
@@ -180,6 +180,23 @@ public class BoardTest {
 
 
 
+    @Test
+    public void testAddManyMoveNotations() {
+        notationPanel notationPanel = new notationPanel("Player1", "Player2");
+
+        // Add 1000 move notations
+        for (int i = 0; i < 1000; i++) {
+            notationPanel.addMoveNotation("Move" + i);
+        }
+
+        String actualText = notationPanel.getNotationTextArea().getText();
+
+        String expectedLastMove = "Player2: Move999\n";
+        Assert.assertTrue(actualText.contains(expectedLastMove));
+
+    }
 }
+
+
 
 
