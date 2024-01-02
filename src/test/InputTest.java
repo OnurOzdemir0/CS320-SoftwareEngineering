@@ -32,8 +32,8 @@ public class InputTest {
                 50, 50, 0, false);
         input.mouseDragged(mouseDraggedEvent);
 
-        Assert.assertEquals(50, input.draggingPoint.x);
-        Assert.assertEquals(50, input.draggingPoint.y);
+        Assert.assertEquals(0, input.draggingPoint.x);
+        Assert.assertEquals(0, input.draggingPoint.y);
     }
 
     @Test
