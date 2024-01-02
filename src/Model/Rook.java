@@ -15,6 +15,8 @@ public class Rook extends Piece{
 	}
     
     public static boolean isRookMoveValid(Move move){ //Created to be able to use in queen
-    	return move.newRow == move.oldRow || move.oldColumn == move.newColumn;
+    	return (move.newRow == move.oldRow && move.newColumn != move.oldColumn)
+        || (move.oldColumn == move.newColumn && move.newRow != move.oldRow);
+
 	}
 }

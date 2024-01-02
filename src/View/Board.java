@@ -11,15 +11,15 @@ import java.util.ArrayList;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Board extends JPanel{ //this is View.Board, so it should be preoccupied with just showing the board.
+public class Board extends JPanel{
 
 	private final static int tileSizeByPixel = 83;
 	public final static int columnNumber = 8;
 	public final static int rowNumber = 8;
-	
+
+
 	public Piece selectedPiece;
 	public notationPanel notationPanel;
-	private JPanel sidebarPanel;
 	public ArrayList<Piece> pieceList= new ArrayList<>();
 
 	public Board() {
@@ -49,7 +49,6 @@ public class Board extends JPanel{ //this is View.Board, so it should be preoccu
 		this.setBackground(Color.gray);
 		this.setLayout(new GridBagLayout());
 		initializePieces();
-		initializeSidebar(username1, username2);
 		this.notationPanel = notationPanel;
 	}
 
@@ -58,12 +57,11 @@ public class Board extends JPanel{ //this is View.Board, so it should be preoccu
 		this.setBackground(Color.gray);
 		this.setLayout(new GridBagLayout());
 		initializePieces();
-		initializeSidebar(new String("username1") , new String( "username2"));
 		this.notationPanel = notationPanel;
 	}
 
 	@Override
-	protected void paintComponent(Graphics g) {
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		paintBoard(g);
 		drawPieces(g);
@@ -71,7 +69,7 @@ public class Board extends JPanel{ //this is View.Board, so it should be preoccu
 	}
 
 
-	private void initializePieces() {
+	public void initializePieces() {
 		
 		//create all the pieces and add them list
 		pieceList.add(new Rook(0, 0, false));
@@ -155,7 +153,9 @@ public class Board extends JPanel{ //this is View.Board, so it should be preoccu
 		}
 	}
 
-	private void drawPieces(Graphics g) {
+
+
+	public void drawPieces(Graphics g) {
 		for (Piece piece : pieceList) {
 			if (piece.getPieceImage() != null) {
 				int x = piece.getColumn() * tileSizeByPixel;
@@ -170,28 +170,22 @@ public class Board extends JPanel{ //this is View.Board, so it should be preoccu
 		}
 	}
 
-	private void initializeSidebar(String username1, String username2) {
-		JLabel usernameLabel1 = new JLabel("Player 1: " + username1);
-		usernameLabel1.setBounds(700, 10, 100, 30);
-
-		JLabel usernameLabel2 = new JLabel("Player 2: " + username2);
-		usernameLabel2.setBounds(700, 50, 100, 30);
-	}
 	
 public void highlight_valid_positions(Graphics g){
 		
 		Graphics2D g2d = (Graphics2D) g;
-		
+
 		if(selectedPiece!=null) {
-			for (int r = 0; r < rowNumber; r++){
-				for (int c = 0; c < columnNumber; c++){
-					if(selectedPiece.isMoveValid(new Move(this,selectedPiece,r,c))) {
+			for (int r = 0; r < 8; r++){
+				for (int c = 0; c < 8; c++){
+					Move move = new Move(this,selectedPiece,r,c);
+
+					if(move.canMove()){
 						g2d.setColor(new Color(82, 252, 3, 80));
-						g2d.fillRect(c*tileSizeByPixel, r*tileSizeByPixel, tileSizeByPixel, tileSizeByPixel);
+						g2d.fillRect(c*tileSizeByPixel, r * tileSizeByPixel, tileSizeByPixel, tileSizeByPixel);
 					}
 				}
 			}
-			
 		}
 	}
 	

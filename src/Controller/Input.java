@@ -49,11 +49,14 @@ public class Input implements MouseListener, MouseMotionListener {
         if (row >= board.rowNumber) row = board.rowNumber - 1;
 
         if (board.selectedPiece != null && board.selectedPiece.isWhite == turnWhite) {
+            System.out.println(selectedPiece == board.selectedPiece);
             Move move = new Move(board, board.selectedPiece, row, col);
             if(move.playing_piece.isMoveValid(move)){
 
-                if(move.makeMove()) //if can make move then turn changes. some validations are made in makeMove() some in isMoveValid()
+                if(move.canMove()){ //if can make move then turn changes. some validations are made in makeMove() some in isMoveValid()
+                    move.makeMove();
                     turnWhite = !turnWhite;
+                }
             }
             board.selectedPiece = null;
             board.repaint();
@@ -74,13 +77,13 @@ public class Input implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
-
-        if (board.selectedPiece != null) {
-            draggingPoint = e.getPoint();
-            board.repaint();
-        }
+//        int x = e.getX();
+//        int y = e.getY();
+//
+//        if (board.selectedPiece != null) {
+//            draggingPoint = e.getPoint();
+//            board.repaint();
+//        }
     }
 
         @Override
@@ -95,17 +98,9 @@ public class Input implements MouseListener, MouseMotionListener {
         public void mouseExited (MouseEvent e){
         }
 
-        //@Override
-        // public void mouseMoved(MouseEvent e) { }
-
 
         public void mouseMoved(MouseEvent e){
 
-            int col = e.getX() / Board.getTilesizebypixel();
-            int row = e.getY() / Board.getTilesizebypixel();
-
-
-//            System.out.println("Mouse moved to position - Col: " + col + ", Row: " + row);
         }
 
 }

@@ -13,7 +13,12 @@ public class notationPanel extends JPanel{
 	String user2;
 	int turn=0;
 
-    public notationPanel(String username1, String username2) {
+	public JTextArea getNotationTextArea() {
+		return notationTextArea;
+	}
+
+
+	public notationPanel(String username1, String username2) {
     	this.user1=username1;
     	this.user2=username2;
         setLayout(new BorderLayout());
@@ -23,7 +28,11 @@ public class notationPanel extends JPanel{
         add(scrollPane, BorderLayout.CENTER);
     }
 
-    public void addMoveNotation(String notation) {
+	public notationPanel() {
+
+	}
+
+	public void addMoveNotation(String notation) {
     	if(turn%2==0) {
     		notationTextArea.append(user1 + ": " + notation + "\n");
     		this.turn++;

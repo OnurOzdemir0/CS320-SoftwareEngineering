@@ -1,4 +1,5 @@
 package src.View;
+import javax.imageio.ImageIO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,8 +9,8 @@ import java.awt.event.ActionListener;
 public class LoginView extends JFrame {
     private JTextField t_username1;
     private JTextField t_username2 ;
-    String username1 = "user1";
-    String username2 = "user2";
+    String username1 = "Player1";
+    String username2 = "Player2";
     private JPanel panel;
     private JPanel cardPanel;
     
