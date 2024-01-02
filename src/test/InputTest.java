@@ -2,12 +2,11 @@ package src.test;
 
 import org.junit.Assert;
 import org.junit.Test;
-import src.Controller.Input;
-import src.Model.Piece;
-import src.View.Board;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import src.Controller.Input;
+import src.View.Board;
 
 public class InputTest {
 
@@ -33,9 +32,8 @@ public class InputTest {
                 50, 50, 0, false);
         input.mouseDragged(mouseDraggedEvent);
 
-
-        //Assert.assertEquals(0, input.draggingPoint.x);
-       // Assert.assertEquals(0, input.draggingPoint.y);
+        Assert.assertEquals(50, input.draggingPoint.x);
+        Assert.assertEquals(50, input.draggingPoint.y);
     }
 
     @Test
