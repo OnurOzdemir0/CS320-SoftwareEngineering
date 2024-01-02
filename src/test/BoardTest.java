@@ -63,6 +63,13 @@ public class BoardTest {
         Assert.assertEquals(0, piece.getRow());
     }
 
+    @Test
+    public void testGetTileSizeByPixel (){
+        int tilesizebypixel=83;
+        int truetilesizebypixel= Board.getTilesizebypixel();
+        Assert.assertEquals(tilesizebypixel,truetilesizebypixel);
+
+    }
 
     @Test
     public void testPiecesNumber() {
