@@ -1,6 +1,8 @@
 package src.Model;
 
 import src.View.Board;
+import src.View.GameOverView;
+import src.View.LoginView;
 
 import java.awt.*;
 
@@ -215,8 +217,8 @@ public class Move {
         this.board.repaint();
 
         if (isCheckmate(!this.playing_piece.isWhite)) { // Check if the opponent is in checkmate
-            // Handle checkmate (e.g., end the game, declare the winner)
-            System.out.println("Checkmate! " + (this.playing_piece.isWhite ? "Black" : "White") + " wins.");
+            src.View.GameOverView gameOverView = new GameOverView();
+
         }
     }
 
