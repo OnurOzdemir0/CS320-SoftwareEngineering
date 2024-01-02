@@ -25,12 +25,16 @@ public class PieceTest {
     @Test
     public void testFreeBishopMoves(){
         Bishop bishop = new Bishop(5,5,true);
-        for(int i=2; i<=8; i++){
-            Move move = new Move(board, bishop, i, i); //on the same diagonal
-            assertTrue(bishop.isMoveValid(move));
+        Board b = new Board();
+        for(int i=1; i<8; i++){
 
-            Move move2 = new Move(board, bishop, i, 8+2-i); //this draws the other diagonal for the initial point
-            assertTrue(bishop.isMoveValid(move2));
+            Move move = new Move(b, bishop, i, i); //on the same diagonal
+            if(i!=5)
+                assertTrue(bishop.isMoveValid(move));
+
+            Move move2 = new Move(b, bishop, i, 8+2-i); //this draws the other diagonal for the initial point
+            if(i!=5)
+                assertTrue(bishop.isMoveValid(move2));
         }
     }
     @Test
@@ -94,12 +98,14 @@ public class PieceTest {
     @Test
     public void testQueen(){ 
         Queen black_queen = new Queen(0,3,false); //siyah vezir 
-        
+
+        Board b = new Board();
+
         ArrayList<Move> moves = new ArrayList<>(); // geçerli hamleler
-        moves.add(new Move(board, black_queen, 0, 4));
-        moves.add(new Move(board, black_queen, 0, 7));
-        moves.add(new Move(board, black_queen, 3, 0));
-        moves.add(new Move(board, black_queen, 4, 7));
+        moves.add(new Move(b, black_queen, 0, 4));
+        moves.add(new Move(b, black_queen, 0, 7));
+        moves.add(new Move(b, black_queen, 3, 0));
+        moves.add(new Move(b, black_queen, 4, 7));
         
         for(Move move : moves) 
             assertTrue(black_queen.isMoveValid(move)); 
@@ -107,10 +113,10 @@ public class PieceTest {
         Queen white_queen = new Queen(7,3,true); //beyaz vezir 
         
         ArrayList<Move> moves2 = new ArrayList<>(); // geçersiz hamleler
-        moves2.add(new Move(board, white_queen, 5, 4));
-        moves2.add(new Move(board, white_queen, 0, 5));
-        moves2.add(new Move(board, white_queen, 2, 6));
-        moves2.add(new Move(board, white_queen, 1, 2));
+        moves2.add(new Move(b, white_queen, 5, 4));
+        moves2.add(new Move(b, white_queen, 0, 5));
+        moves2.add(new Move(b, white_queen, 2, 6));
+        moves2.add(new Move(b, white_queen, 1, 2));
         
         for(Move move : moves2) 
             assertFalse(white_queen.isMoveValid(move));  
