@@ -11,48 +11,44 @@ public class Move {
     int oldColumn;
     int newRow;
     int newColumn;
-    
+
     public Piece playing_piece;
-	Piece captured_piece;
+    Piece captured_piece;
 
     Board board; //lazım oluyor.
-    
-	private String getMoveNotation(Move move) {
-		
-		final String[] column_to_letter = {"a", "b", "c", "d", "e", "f", "g", "h"};
-		String newCol = column_to_letter[move.newColumn];
-		int newRow= 8-move.newRow;
-		if( move.playing_piece.type.name().equals("Knight")) {
-			if(move.captured_piece==null) {
-				return "N" + newCol + newRow;
-			}
-			else {
-				return "N" + "x" + newCol + newRow;
-			}
-		}
-		
-		else{
-			if(move.captured_piece==null) {
-				return move.playing_piece.type.name().charAt(0) + newCol +newRow;
-			}
-			else {
-				return move.playing_piece.type.name().charAt(0) + "x" + newCol + newRow;
-			}
-		}
-	}
 
-    public Move(Board board, Piece piece, int newRow, int newColumn){
-        this.playing_piece=piece;
-    	this.oldColumn=playing_piece.getColumn();
-    	this.oldRow=playing_piece.getRow();
+    private String getMoveNotation(Move move) {
+
+        final String[] column_to_letter = {"a", "b", "c", "d", "e", "f", "g", "h"};
+        String newCol = column_to_letter[move.newColumn];
+        int newRow = 8 - move.newRow;
+        if (move.playing_piece.type.name().equals("Knight")) {
+            if (move.captured_piece == null) {
+                return "N" + newCol + newRow;
+            } else {
+                return "N" + "x" + newCol + newRow;
+            }
+        } else {
+            if (move.captured_piece == null) {
+                return move.playing_piece.type.name().charAt(0) + newCol + newRow;
+            } else {
+                return move.playing_piece.type.name().charAt(0) + "x" + newCol + newRow;
+            }
+        }
+    }
+
+    public Move(Board board, Piece piece, int newRow, int newColumn) {
+        this.playing_piece = piece;
+        this.oldColumn = playing_piece.getColumn();
+        this.oldRow = playing_piece.getRow();
         this.newRow = newRow;
         this.newColumn = newColumn;
-        this.captured_piece=board.getPiece(newColumn, newRow);
+        this.captured_piece = board.getPiece(newColumn, newRow);
         this.board = board;
     }
 
-    public boolean moveCollides(){
-        if(this.playing_piece.getType() == Type.Knight) {
+    public boolean moveCollides() {
+        if (this.playing_piece.getType() == Type.Knight) {
             return false;
         }
 
@@ -61,21 +57,19 @@ public class Move {
         int smallColumn = Math.min(oldColumn, newColumn);
         int bigColumn = Math.max(oldColumn, newColumn);
 
-        if(smallRow == bigRow){ //yatay harekette
-            while(smallColumn != bigColumn-1){
+        if (smallRow == bigRow) { //yatay harekette
+            while (smallColumn != bigColumn - 1) {
                 smallColumn++;
-                if(board.getPiece(smallColumn, smallRow) != null)
+                if (board.getPiece(smallColumn, smallRow) != null)
                     return true;
             }
-        }
-        else if(smallColumn == bigColumn) { //dikey hareket
-            while(smallRow != bigRow-1){
+        } else if (smallColumn == bigColumn) { //dikey hareket
+            while (smallRow != bigRow - 1) {
                 smallRow++;
-                if(board.getPiece(smallColumn, smallRow) != null)
+                if (board.getPiece(smallColumn, smallRow) != null)
                     return true;
             }
-        }
-        else{ //çapraz hareket
+        } else { //çapraz hareket
             int rowStep = (newRow > oldRow) ? 1 : -1;
             int columnStep = (newColumn > oldColumn) ? 1 : -1;
             int currentRow = oldRow;
@@ -118,7 +112,17 @@ public class Move {
         if (!isCheck(isWhite)) {
             return false;
         }
+        return mateCheck(isWhite);
+    }
 
+    public boolean isStalemate(boolean isWhite){
+        if(isCheck(isWhite)){
+            return false;
+        }
+        return mateCheck(isWhite);
+    }
+
+    public boolean mateCheck(boolean isWhite) {
         for (Piece piece : board.pieceList) {
             if (piece.isWhite == isWhite) {
                 for (int newRow = 0; newRow < Board.rowNumber; newRow++) {
@@ -157,6 +161,7 @@ public class Move {
         }
         return true;
     }
+
 
 
 
@@ -218,7 +223,9 @@ public class Move {
 
         if (isCheckmate(!this.playing_piece.isWhite)) { // Check if the opponent is in checkmate
             src.View.GameOverView gameOverView = new GameOverView();
-
+        }
+        if(isStalemate(!this.playing_piece.isWhite)){
+            System.out.println("stalemate");
         }
     }
 
