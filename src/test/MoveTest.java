@@ -5,6 +5,7 @@ import org.junit.Test;
 import src.View.Board;
 
 import src.Model.*;
+import src.View.notationPanel;
 
 public class MoveTest {
 
@@ -37,14 +38,32 @@ public class MoveTest {
 
     @Test
     public void test1000Moves() {
-        Board board = new Board();
+        notationPanel np = new notationPanel("user1", "user2");
+        Board board = new Board(np, "user1", "user2");
         board.initializePieces();
 
         for (int i = 0; i < 1000; i++) {
-            Piece knight = board.pieceList.get(i % 2 == 0 ? 17 : 1); //
-            int newRow = knight.getRow() + (i % 2 == 0 ? 2 : -2);
-            int newColumn = knight.getColumn() + (i % 2 == 0 ? 1 : -1);
-            Move move = new Move(board, knight, newRow, newColumn);
+            Piece knight = board.pieceList.get(i % 2 == 0 ? 17 : 1);
+            int mod = i%4;
+            int r,c;
+
+            if(mod==0){
+                r=3;
+                c=6;
+            } else if (mod == 1) {
+                r=7;
+                c=4;
+            } else if (mod == 2) {
+                r=0;
+                c=7;
+            }else {
+                r=8;
+                c=7;
+            }
+            Move move = new Move(board, knight, r, c);
+            if (move.canMove())
+                move.makeMove();
         }
     }
+
 }
