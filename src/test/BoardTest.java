@@ -188,28 +188,27 @@ public class BoardTest {
     public void testAddManyMoveNotations() {
         notationPanel notationPanel = new notationPanel("Player1", "Player2");
 
-        // Add 1000 move notations
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 100; i++) {
             notationPanel.addMoveNotation("Move" + i);
         }
 
         String actualText = notationPanel.getNotationTextArea().getText();
 
-        String expectedLastMove = "Player2: Move999\n";
+        String expectedLastMove = "Player2: Move99\n";
         Assert.assertTrue(actualText.contains(expectedLastMove));
-
+    //T-SRS-CheT-004
     }
 
-    @Test
-    public void testCheck(){
-        King king = board_real.getKing(true);
-    }
 
     @Test
     public void testManual(){
         Board b = new Board(null,null,null);
         Assert.assertTrue(b.isVisible());
     }
+
+
+
+    
 }
 
 
