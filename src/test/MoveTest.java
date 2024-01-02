@@ -1,6 +1,7 @@
 package src.test;
 
 import org.junit.Assert;
+import org.junit.*;
 import org.junit.Test;
 import src.View.Board;
 
@@ -37,7 +38,7 @@ public class MoveTest {
     }
 
     @Test
-    public void test1000Moves() {
+    public void test1000Moves() { //T-SRS-Chet-005
         notationPanel np = new notationPanel("user1", "user2");
         Board board = new Board(np, "user1", "user2");
         board.initializePieces();

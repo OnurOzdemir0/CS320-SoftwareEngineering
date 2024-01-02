@@ -225,7 +225,7 @@ public class Move {
             src.View.GameOverView gameOverView = new GameOverView();
         }
         if(isStalemate(!this.playing_piece.isWhite)){
-            System.out.println("stalemate");
+            src.View.GameOverView gameOverView = new GameOverView();
         }
     }
 
