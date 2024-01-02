@@ -2,6 +2,8 @@ package src.Model;
 
 import src.View.Board;
 
+import java.awt.*;
+
 public class Move {
     int oldRow; //Move objects can include these, but this might be unnecessary...
     int oldColumn;
@@ -117,33 +119,43 @@ public class Move {
 
         for (Piece piece : board.pieceList) {
             if (piece.isWhite == isWhite) {
-                int originalRow = piece.getRow();
-                int originalColumn = piece.getColumn();
-
-                // Try all possible moves for this piece
                 for (int newRow = 0; newRow < Board.rowNumber; newRow++) {
                     for (int newColumn = 0; newColumn < Board.columnNumber; newColumn++) {
+                        if (piece.getRow() == newRow && piece.getColumn() == newColumn) {
+                            continue;
+                        }
+
                         Move testMove = new Move(board, piece, newRow, newColumn);
-                        if (piece.isMoveValid(testMove) && !testMove.moveCollides()) {
+                        if (testMove.canMove()) {
+                            int originalRow = piece.getRow();
+                            int originalColumn = piece.getColumn();
+                            Piece originalCaptured = testMove.captured_piece;
+
                             piece.setRow(newRow);
                             piece.setColumn(newColumn);
+                            if (originalCaptured != null) {
+                                board.pieceList.remove(originalCaptured);
+                            }
 
                             boolean stillInCheck = isCheck(isWhite);
 
                             piece.setRow(originalRow);
                             piece.setColumn(originalColumn);
+                            if (originalCaptured != null) {
+                                board.pieceList.add(originalCaptured);
+                            }
 
                             if (!stillInCheck) {
-                                return false; // Found a move to escape check
+                                return false;
                             }
                         }
                     }
                 }
             }
         }
-
         return true;
     }
+
 
 
     public boolean canMove() {
@@ -202,8 +214,8 @@ public class Move {
         board.notationPanel.addMoveNotation(getMoveNotation(this));
         this.board.repaint();
 
-        if (isCheckmate(!this.playing_piece.isWhite)) {
-            //end game
+        if (isCheckmate(!this.playing_piece.isWhite)) { // Check if the opponent is in checkmate
+            // Handle checkmate (e.g., end the game, declare the winner)
             System.out.println("Checkmate! " + (this.playing_piece.isWhite ? "Black" : "White") + " wins.");
         }
     }
